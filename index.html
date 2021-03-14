@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 12</title>
+</head>
+<style>
+    input[type=text],
+    select {
+        display: block;
+    }
+
+    h1 {
+        font-size: 16px;
+        margin-bottom: 0px;
+        margin-bottom: 6px;
+    }
+
+    span {
+        font-size: 13px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: darkblue;
+    }
+
+    p {
+        margin: 0px;
+    }
+
+    body {
+        width: 40%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .questao {
+        background-color: #e0f7faa1;
+        padding: 1px 0px 10px 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+
+    }
+
+    .questao:hover {
+        background-color: #e0f7fa;
+    }
+
+    input[type=button] {
+        margin-top: 10px;
+    }
+</style>
+
+<body>
+    <div id="corpo">
+        <div class="questao">
+            <h1>Questã 01:<span>Mostrar os números entre 2 valores
+                    <a href="detalhesExe12.html" target="_blank">detalhar</a></span></h1>
+            <p id="questao_1">Resultado: Os número entre A e Z são (x,x,x,x,x).</p>
+            <label for="numero1">Valor 01:</label>
+            <input type="text" id="numero1">
+            <label for="numero2">Valor 02:</label>
+            <input type="text" id="numero2">
+            <input type="button" value="Executar" onclick="exibir()">
+        </div>
+        <div class="questao">
+            <h1>Questã 02:<span> Lista armazenada <a href="detalhesExe12.html" target="_blank">detalhar</a></span></h1>
+            <p id="questao_2">Resultado: A lista de itens é [xxxx,xxxx,xxxx,xxxxx]</p>
+            <label for="item">Item:</label>
+            <input type="text" id="item">
+            <input type="button" value="Add" onclick="addElem( )">
+            <input type="button" value="Show" onclick="show( )">
+            <input type="button" value="Clear" onclick="clean( )">
+        </div>
+        <div class="questao">
+            <h1>Questã 02:<span> Lista homens e mulheres <a href="detalhesExe12.html"
+                        target="_blank">detalhar</a></span></h1>
+            <p id="questao_3">Resultado:
+                <br>Lista de homens [xxxx,xxxx,xxxx,xxxxx]
+                <br>Lista de mulheres [xxxx,xxxx,xxxx,xxxxx]
+            </p>
+            <label for="name">Nome:</label>
+            <input type="text" id="name">
+            <label for="">Sexo:</label>
+            <select name="sexo" id="gender">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
+            <input type="button" value="Add" onclick="addName()">
+            <input type="button" value="Show" onclick="showLists()">
+            <input type="button" value="Clear onclick = " eraseName()">
+        </div>
+
+    </div>
+</body>
+
+<script>
+    function exibir() {
+        var text = "";
+        var num1 = parseFloat(document.getElementById("numero1").value);
+        var num2 = parseFloat(document.getElementById("numero2").value);
+        var i = num1;
+
+        if (i === num2) {
+
+            document.getElementById("questao_1").innerHTML = "Resultado: Os número entre A e Z são " + "iguais";
+        }
+        else {
+            while (i < num2) {
+
+                text += "" + i + " , "
+
+                i++;
+
+            }
+
+            document.getElementById("questao_1").innerHTML = "Resultado: Os número entre A e Z são " + "(" + text + ")";
+        }
+    }
+
+    var itens = [];
+    function addElem() {
+        itens.push(document.getElementById("item").value);
+      
+    }
+
+    function show() {
+
+        var txt = "[";
+
+        txt += itens.toString();
+        txt += "]";
+        document.getElementById("questao_2").innerHTML = "A lista de itens é: " + txt;
+
+    }
+
+    function clean() {
+
+
+        var item = document.getElementById("item").value;
+
+        if (itens.includes(item)) {
+
+            var ind = itens.indexOf(item);
+            itens.splice(ind, 1);
+
+        }
+
+        else {
+
+            document.getElementById("questao_2").innerHTML = item + " não existe na lista!";
+
+        }
+
+    }
+
+        var vectorWoman = [];
+        var vectorMan = [];
+    function addName() {
+
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        if (gender == "M") {
+
+            if (!vectorMan.includes(name)) {
+
+                vectorMan.push(name);
+
+            }
+
+        }
+
+        else {
+
+            if (!vectorWoman.includes(name)) {
+
+                vectorWoman.push(name);
+
+            }
+
+        }
+
+    }
+
+    function showLists() {
+
+        var txt1 = "[";
+        var txt2 = "[";
+
+        txt1 += vectorMan.toString();
+        txt1 += "]";
+
+        txt2 += vectorWoman.toString();
+        txt2 += "]";
+
+        document.getElementById("questao_3").innerHTML = "Lista de homens: " + txt1 + "<br> Lista de mulheres: " + txt2;
+
+    }
+
+    function eraseName() {
+
+        var name = document.getElementById("name").value;
+        var gender = document.getElementById("gender").value;
+
+        if (gender == "M") {
+
+            if (vectorMan.includes(name)) {
+
+                var ind = vectorMan.indexOf(name);
+                vectorMan.splice(ind, 1);
+
+            }
+
+            else {
+
+                document.getElementById("questao_3").innerHTML = "O nome " + name + " não existe nas listas!";
+
+            }
+
+        }
+
+        else {
+
+            if (vectorWoman.includes(name)) {
+
+                var ind = vectorWoman.indexOf(name);
+                vectorWoman.splice(ind, 1);
+
+            }
+
+            else {
+
+                document.getElementById("questao_3").innerHTML = "O nome " + name + " não existe nas listas!";
+
+            }
+
+        }
+
+
+    }
+
+</script>
+
+
+
+</html>
